@@ -19,7 +19,7 @@ const getProductByIdFromDB = async (id: string) => {
 // find product by id and update
 const updateProduct = async (data: any) => {
   const { updateData, productId } = data;
-  const result = await ProductModel.updateOne(
+  const result = await ProductModel.findOneAndUpdate(
     { _id: productId },
     {
       $set: {
@@ -36,9 +36,15 @@ const updateProduct = async (data: any) => {
   console.log(result);
   return result;
 };
+
+const deletePorductforDB = async (id: string) => {
+  const result = await ProductModel.findByIdAndDelete({ _id: id });
+  return result;
+};
 export const ProductServices = {
   createProductIntoDB,
   getAllProductfromDB,
   getProductByIdFromDB,
   updateProduct,
+  deletePorductforDB,
 };
