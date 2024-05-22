@@ -17,3 +17,8 @@ export type TProduct = {
   variants: TVariants[];
   inventory: TInventory;
 };
+
+export interface UpdateProductData {
+  updateData: TProduct;
+  productId: string;
+}

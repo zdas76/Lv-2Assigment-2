@@ -12,14 +12,14 @@ const createOrdertoDB = async (data: TOrder) => {
   }
 
   if (data.quantity <= fineProdect.inventory.quantity) {
-    let newQuantity = fineProdect.inventory.quantity - data.quantity;
-    let updateQuantity = await ProductModel.findByIdAndUpdate(
+    const newQuantity = fineProdect.inventory.quantity - data.quantity;
+    const updateQuantity = await ProductModel.findByIdAndUpdate(
       { _id: data.productId },
       { $set: { inventory: { quantity: newQuantity } } },
       { new: true }
     );
     if (updateQuantity?.inventory.quantity == 0) {
-      let updateQuantity = await ProductModel.findByIdAndUpdate(
+      await ProductModel.findByIdAndUpdate(
         { _id: data.productId },
         { $set: { inventory: { quantity: 0, inStock: false } } },
         { new: true }

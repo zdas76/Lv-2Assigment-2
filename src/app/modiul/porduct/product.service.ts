@@ -1,4 +1,4 @@
-import { TProduct } from "./product.interface";
+import { TProduct, UpdateProductData } from "./product.interface";
 import { ProductModel } from "./product.model";
 
 const createProductIntoDB = async (product: TProduct) => {
@@ -36,7 +36,7 @@ const getProductByIdFromDB = async (id: string) => {
 };
 
 // find product by id and update
-const updateProduct = async (data: string | any) => {
+const updateProduct = async (data: UpdateProductData) => {
   const { updateData, productId } = data;
   const result = await ProductModel.findOneAndUpdate(
     { _id: productId },
