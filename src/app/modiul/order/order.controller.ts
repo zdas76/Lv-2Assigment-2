@@ -4,7 +4,7 @@ import OrderValidationSchema from "./order.validation";
 
 // Create a order
 const createOrder = async (req: Request, res: Response) => {
-  const order = req.body.order;
+  const order = req.body;
 
   if (!order) {
     return res.status(400).json({

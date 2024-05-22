@@ -4,7 +4,7 @@ import productValidationSchema from "./product.validation";
 
 // Create a new proeuct
 const createProduct = async (req: Request, res: Response) => {
-  const product = req.body.product;
+  const product = req.body;
 
   // check received value
 

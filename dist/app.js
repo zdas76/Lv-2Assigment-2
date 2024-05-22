@@ -13,10 +13,13 @@ app.use((0, cors_1.default)());
 app.use("/api/products", product_routes_1.ProductRouter);
 app.use("/api/orders", order_routes_1.OrderRoutes);
 app.get("/", (req, res) => {
-    res.send("Welcome to my assignment-2!. You are successfully connected with me");
+    res.status(200).json({
+        status: true,
+        message: "Welcome to my assignment-2!. You are successfully connected with me",
+    });
 });
 app.get("/*", (req, res) => {
-    res.send({
+    res.status(200).json({
         success: false,
         message: "Route not found",
     });

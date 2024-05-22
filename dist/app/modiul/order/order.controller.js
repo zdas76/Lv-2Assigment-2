@@ -17,7 +17,7 @@ const order_service_1 = require("./order.service");
 const order_validation_1 = __importDefault(require("./order.validation"));
 // Create a order
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const order = req.body.order;
+    const order = req.body;
     if (!order) {
         return res.status(400).json({
             success: false,

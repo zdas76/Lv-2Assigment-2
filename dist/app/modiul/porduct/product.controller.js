@@ -17,7 +17,7 @@ const product_service_1 = require("./product.service");
 const product_validation_1 = __importDefault(require("./product.validation"));
 // Create a new proeuct
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const product = req.body.product;
+    const product = req.body;
     // check received value
     if (!product) {
         return res.status(400).json({
