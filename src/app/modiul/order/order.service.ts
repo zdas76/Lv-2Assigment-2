@@ -1,9 +1,8 @@
-import { TInventory } from "./../porduct/product.interface";
-import { object } from "zod";
-import { TProduct } from "../porduct/product.interface";
 import { ProductModel } from "../porduct/product.model";
 import { TOrder } from "./order.interface";
 import { OrderModel } from "./order.model";
+
+// Creact a order and update product quantity
 
 const createOrdertoDB = async (data: TOrder) => {
   const fineProdect = await ProductModel.findById({ _id: data.productId });
@@ -32,6 +31,8 @@ const createOrdertoDB = async (data: TOrder) => {
     };
   }
 };
+
+// Get all order form bd with serch params;
 
 const getAllOrderfromDB = async (email?: string | undefined) => {
   if (email) {

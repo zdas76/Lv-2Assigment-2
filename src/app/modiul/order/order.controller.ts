@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { OrderService } from "./order.service";
 import OrderValidationSchema from "./order.validation";
-import { number } from "zod";
 
+// Create a order
 const createOrder = async (req: Request, res: Response) => {
   const order = req.body.order;
 
@@ -27,6 +27,8 @@ const createOrder = async (req: Request, res: Response) => {
     });
   }
 };
+
+// get Order with Search Query
 
 const getOrders = async (req: Request, res: Response) => {
   const { email } = req.query;
