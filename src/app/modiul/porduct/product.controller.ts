@@ -1,29 +1,43 @@
 import { Request, Response } from "express";
 import { ProductServices } from "./product.service";
-import { TProduct } from "./product.interface";
+import productValidationSchema from "./product.validation";
 
 // Create a new proeuct
 const createProduct = async (req: Request, res: Response) => {
   const product = req.body.product;
+  if (!product) {
+    return res.status(400).json({
+      success: false,
+      message: "No product found!",
+    });
+  }
+  const zodValiedData = productValidationSchema.parse(product);
+
   try {
-    const result = await ProductServices.createProductIntoDB(product);
+    const result = await ProductServices.createProductIntoDB(zodValiedData);
     res.status(200).json({
       success: true,
       message: "Product created successfully!",
       data: result,
     });
   } catch (error) {
-    console.log(error);
+    res.status(400).json({
+      success: true,
+      message: "Fail! to created Product",
+    });
   }
 };
 
 // Get All Product
 const getAllProduct = async (req: Request, res: Response) => {
+  const { searchTerm } = req.query;
   try {
-    const result = await ProductServices.getAllProductfromDB();
+    const result = await ProductServices.getAllProductfromDB(
+      searchTerm as string
+    );
     res.status(200).json({
       success: true,
-      message: "Get all product successfully!",
+      message: "Get product successfully!",
       data: result,
     });
   } catch (error) {
@@ -38,7 +52,6 @@ const getAllProduct = async (req: Request, res: Response) => {
 const getProductById = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
-
     const result = await ProductServices.getProductByIdFromDB(productId);
     res.status(200).json({
       success: true,

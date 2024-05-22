@@ -13,11 +13,7 @@ export type TProduct = {
   description: string;
   price: number;
   category: string;
-  tags: "smartphone" | "Apple" | "iso";
-  variants: [TVariants];
+  tags: string[];
+  variants: TVariants[];
   inventory: TInventory;
 };
-
-export interface IupdateProduct extends TProduct {
-  _id: string;
-}

@@ -6,9 +6,28 @@ const createProductIntoDB = async (product: TProduct) => {
   return result;
 };
 
-const getAllProductfromDB = async () => {
-  const result = await ProductModel.find();
-  return result;
+const getAllProductfromDB = async (data?: string | undefined) => {
+  if (data) {
+    const result = await ProductModel.find({
+      $or: [
+        { description: { $regex: data } },
+        { name: { $regex: data } },
+        { category: { $regex: data } },
+      ],
+    });
+
+    if (result.length > 0) {
+      return result;
+    } else {
+      return {
+        success: false,
+        message: "Data not found",
+      };
+    }
+  } else {
+    const result = await ProductModel.find();
+    return result;
+  }
 };
 
 const getProductByIdFromDB = async (id: string) => {
@@ -17,7 +36,7 @@ const getProductByIdFromDB = async (id: string) => {
 };
 
 // find product by id and update
-const updateProduct = async (data: any) => {
+const updateProduct = async (data: string | any) => {
   const { updateData, productId } = data;
   const result = await ProductModel.findOneAndUpdate(
     { _id: productId },
@@ -33,7 +52,7 @@ const updateProduct = async (data: any) => {
       },
     }
   );
-  console.log(result);
+
   return result;
 };
 
