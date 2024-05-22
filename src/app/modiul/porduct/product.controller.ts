@@ -5,12 +5,17 @@ import productValidationSchema from "./product.validation";
 // Create a new proeuct
 const createProduct = async (req: Request, res: Response) => {
   const product = req.body.product;
+
+  // check received value
+
   if (!product) {
     return res.status(400).json({
       success: false,
       message: "No product found!",
     });
   }
+
+  // send value to zod for validation
   const zodValiedData = productValidationSchema.parse(product);
 
   try {
